@@ -1,8 +1,5 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinationcenter;
 
-import com.vaccination.entity.CenterStatus;
-import com.vaccination.entity.VaccinationCenter;
-import com.vaccination.repository.VaccinationCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

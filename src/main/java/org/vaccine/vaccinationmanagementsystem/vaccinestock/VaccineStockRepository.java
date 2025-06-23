@@ -1,6 +1,5 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinestock;
 
-import com.vaccination.entity.VaccineStock;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -19,7 +19,15 @@ public class UserRegistrationDTO {
     private String state;
 
     private String pincode;
+    private Role role;
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
 // Constructors
 

@@ -1,5 +1,8 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinationcenter;
-import javax.persistence.*;
+import jakarta.persistence.*;
+import org.vaccine.vaccinationmanagementsystem.appointment.Appointment;
+import org.vaccine.vaccinationmanagementsystem.vaccinestock.VaccineStock;
+
 
 import java.time.LocalTime;
 

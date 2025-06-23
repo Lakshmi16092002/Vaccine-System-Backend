@@ -1,12 +1,13 @@
 package org.vaccine.vaccinationmanagementsystem.auth;
 
-import com.vaccination.dto.LoginDTO;
-import com.vaccination.dto.UserRegistrationDTO;
-import com.vaccination.entity.User;
-import com.vaccination.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.vaccine.vaccinationmanagementsystem.login.LoginDTO;
+import org.vaccine.vaccinationmanagementsystem.user.User;
+import org.vaccine.vaccinationmanagementsystem.user.UserRegistrationDTO;
+import org.vaccine.vaccinationmanagementsystem.user.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
