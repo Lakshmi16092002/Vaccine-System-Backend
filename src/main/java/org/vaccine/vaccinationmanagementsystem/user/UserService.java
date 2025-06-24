@@ -1,7 +1,7 @@
 package org.vaccine.vaccinationmanagementsystem.user;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.vaccine.vaccinationmanagementsystem.login.LoginDTO;
@@ -11,53 +11,57 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    public UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    public UserRegistrationDTO registerUser(UserRegistrationDTO registrationDTO) {
-        if (userRepository.existsByEmail(registrationDTO.getEmail())) {
+    @Bean
+    public static PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();   // strength = 10 by default
+    }
+
+    public User registerUser(UserRegistrationDTO dto) {
+        if (userRepository.existsByEmail(dto.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
 
-        UserRegistrationDTO user = new UserRegistrationDTO();
-        user.setEmail(registrationDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
-        user.setFirstName(registrationDTO.getFirstName());
-        user.setLastName(registrationDTO.getLastName());
-        user.setPhoneNumber(registrationDTO.getPhoneNumber());
-        user.setAddress(registrationDTO.getAddress());
-        user.setCity(registrationDTO.getCity());
-        user.setState(registrationDTO.getState());
-        user.setPincode(registrationDTO.getPincode());
+        User user = new User();
+        user.setEmail(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setAddress(dto.getAddress());
+        user.setCity(dto.getCity());
+        user.setState(dto.getState());
+        user.setPincode(dto.getPincode());
         user.setRole(Role.USER);
 
         return userRepository.save(user);
     }
 
-    public UserRegistrationDTO authenticateUser(LoginDTO loginDTO) {
-        Optional<UserRegistrationDTO> userOptional = userRepository.findByEmail(loginDTO.getEmail());
+    public User authenticateUser(LoginDTO loginDTO) {
+        Optional<User> userOpt = userRepository.findByEmail(loginDTO.getEmail());
 
-        if (userOptional.isPresent()) {
-            UserRegistrationDTO user = userOptional.get();
-            if (passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
-                return user;
-            }
+        if (userOpt.isPresent() &&
+                passwordEncoder.matches(loginDTO.getPassword(), userOpt.get().getPassword())) {
+            return userOpt.get();
         }
         throw new RuntimeException("Invalid email or password");
     }
 
-    public UserRegistrationDTO findById(Long id) {
+    public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public UserRegistrationDTO findByEmail(String email) {
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
-
-

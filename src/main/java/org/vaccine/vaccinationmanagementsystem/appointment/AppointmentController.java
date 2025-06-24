@@ -1,9 +1,7 @@
 package org.vaccine.vaccinationmanagementsystem.appointment;
 
 
-import com.vaccination.dto.AppointmentDTO;
-import com.vaccination.entity.Appointment;
-import com.vaccination.service.AppointmentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,7 @@ import java.util.Map;
 public class AppointmentController {
 
     @Autowired
-    private AppointmentService appointmentService;
+    private org.vaccine.vaccinationmanagementsystem.appointment.AppointmentService appointmentService;
 
     @PostMapping
     public ResponseEntity<?> bookAppointment(@RequestBody AppointmentDTO appointmentDTO) {
@@ -50,7 +48,7 @@ public class AppointmentController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getAppointmentById(@PathVariable Long id) {
         try {
-            Appointment appointment = appointmentService.findById(id);
+            org.vaccine.vaccinationmanagementsystem.appointment.Appointment appointment = appointmentService.findById(id);
             return ResponseEntity.ok(appointment);
         } catch (Exception e) {
             Map<String, String> error = new HashMap<>();
@@ -62,7 +60,7 @@ public class AppointmentController {
     @PutMapping("/{id}/complete")
     public ResponseEntity<?> markAsCompleted(@PathVariable Long id) {
         try {
-            Appointment appointment = appointmentService.markAsCompleted(id);
+            org.vaccine.vaccinationmanagementsystem.appointment.Appointment appointment = appointmentService.markAsCompleted(id);
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Appointment marked as completed");
             response.put("certificateNumber", appointment.getCertificateNumber());

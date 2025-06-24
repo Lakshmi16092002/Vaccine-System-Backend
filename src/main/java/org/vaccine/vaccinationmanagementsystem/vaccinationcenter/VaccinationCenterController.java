@@ -1,7 +1,5 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinationcenter;
 
-import com.vaccination.entity.VaccinationCenter;
-import com.vaccination.service.VaccinationCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

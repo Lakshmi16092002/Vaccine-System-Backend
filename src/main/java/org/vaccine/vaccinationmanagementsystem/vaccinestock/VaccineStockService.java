@@ -1,10 +1,9 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinestock;
 
-import com.vaccination.entity.VaccineStock;
-import com.vaccination.entity.VaccinationCenter;
-import com.vaccination.repository.VaccineStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.vaccine.vaccinationmanagementsystem.vaccinationcenter.VaccinationCenter;
+import org.vaccine.vaccinationmanagementsystem.vaccinationcenter.VaccinationCenterService;
 
 import java.time.LocalDateTime;
 import java.util.List;

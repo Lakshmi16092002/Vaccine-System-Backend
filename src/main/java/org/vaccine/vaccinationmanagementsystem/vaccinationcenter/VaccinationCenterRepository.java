@@ -1,8 +1,5 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinationcenter;
 
-import com.vaccination.entity.VaccinationCenter;
-
-import com.vaccination.entity.CenterStatus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
