@@ -16,15 +16,30 @@ public class VaccineStockController {
     @Autowired
     private VaccineStockService vaccineStockService;
 
+    // UPDATED METHOD WITH DEBUG LOGGING AND BETTER ERROR HANDLING
     @PostMapping("/center/{centerId}")
     public ResponseEntity<?> addOrUpdateStock(@PathVariable Long centerId,
                                               @RequestParam String vaccineType,
                                               @RequestParam Integer quantity) {
         try {
+            // Debug logging
+            System.out.println("Received request - CenterId: " + centerId + ", VaccineType: " + vaccineType + ", Quantity: " + quantity);
+
             VaccineStock stock = vaccineStockService.addOrUpdateStock(centerId, vaccineType, quantity);
-            return ResponseEntity.ok(stock);
+
+            // Return a simple response to avoid JSON issues
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "Stock updated successfully");
+            response.put("stockId", stock.getId());
+
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
+            System.err.println("Error updating stock: " + e.getMessage());
+            e.printStackTrace();
+
             Map<String, String> error = new HashMap<>();
+            error.put("success", "false");
             error.put("error", e.getMessage());
             return ResponseEntity.badRequest().body(error);
         }
@@ -54,5 +69,3 @@ public class VaccineStockController {
         }
     }
 }
-
-
