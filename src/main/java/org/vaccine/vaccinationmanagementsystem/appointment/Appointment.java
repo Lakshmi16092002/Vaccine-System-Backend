@@ -1,5 +1,6 @@
 package org.vaccine.vaccinationmanagementsystem.appointment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import org.vaccine.vaccinationmanagementsystem.user.User;
@@ -27,13 +28,13 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
 
     @JoinColumn(name = "user_id", nullable = false)
-
+    @JsonBackReference("user-appointments")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
 
     @JoinColumn(name = "vaccination_center_id", nullable = false)
-
+    @JsonBackReference("center-appointments")
     private VaccinationCenter vaccinationCenter;
 
     @Column(nullable = false)
@@ -133,4 +134,3 @@ public class Appointment {
     public void setCertificateNumber(String certificateNumber) { this.certificateNumber = certificateNumber; }
 
 }
-
