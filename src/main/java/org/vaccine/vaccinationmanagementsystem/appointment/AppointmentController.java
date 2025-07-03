@@ -1,7 +1,4 @@
 package org.vaccine.vaccinationmanagementsystem.appointment;
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +19,8 @@ public class AppointmentController {
     public ResponseEntity<?> bookAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         try {
             Appointment appointment = appointmentService.bookAppointment(appointmentDTO);
-            return ResponseEntity.ok(appointment);
+            System.out.println(appointmentDTO);
+            return ResponseEntity.ok(appointmentDTO);
         } catch (Exception e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", e.getMessage());

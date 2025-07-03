@@ -1,4 +1,5 @@
 package org.vaccine.vaccinationmanagementsystem.vaccinationcenter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.vaccine.vaccinationmanagementsystem.appointment.Appointment;
 import org.vaccine.vaccinationmanagementsystem.vaccinestock.VaccineStock;
@@ -65,11 +66,9 @@ public class VaccinationCenter {
 
     private List<VaccineStock> vaccineStocks;
 
-
     @OneToMany(mappedBy = "vaccinationCenter", cascade = CascadeType.ALL)
-
+    @JsonManagedReference("center-appointments")
     private List<Appointment> appointments;
-
 
 // Constructors
 

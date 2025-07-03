@@ -39,7 +39,7 @@ public class AppointmentService {
         User user = userService.findById(appointmentDTO.getUserId());
 
         VaccinationCenter center = vaccinationCenterService.findById(appointmentDTO.getVaccinationCenterId());
-
+        System.out.println(center);
         // Check capacity
 
         Long bookedCount = appointmentRepository.countByVaccinationCenterIdAndAppointmentDateAndStatus(

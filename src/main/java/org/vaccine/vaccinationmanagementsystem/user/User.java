@@ -1,5 +1,6 @@
 package org.vaccine.vaccinationmanagementsystem.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.vaccine.vaccinationmanagementsystem.appointment.Appointment;
 
@@ -48,6 +49,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user-appointments")
     private List<Appointment> appointments;
 
     public User() {
@@ -114,6 +116,5 @@ public class User {
 
 
 }
-
 
 
